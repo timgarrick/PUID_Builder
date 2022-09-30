@@ -1,7 +1,5 @@
 package com.timgarrick;
-
 import java.util.Date;
-import java.util.Random;
 
 public class PUID {
     private long puid;
@@ -10,28 +8,24 @@ public class PUID {
     private String firstname;
     private Date createdDate;
     private Date modifiedDate;
+    private Boolean obsolete;
 
     public PUID(String surname, String firstname) {
-        this.puid = 2000000000;
+        this.puid = FieldIncrementData.getInstance().getNewPuid();
         this.puidname = generatePuidName(surname, firstname);
         this.surname = surname;
         this.firstname = firstname;
         this.createdDate = new Date();
+        this.obsolete = false;
     }
 
-    private String generatePuidName(String surname, String firstname) {
+    public String generatePuidName(String surname, String firstname) {
         StringBuilder puidname = new StringBuilder();
 
         puidname.append(surname.toLowerCase());
         puidname.append(firstname.toLowerCase().charAt(0));
-        puidname.append(getRandomDigits());
 
-        return puidname.toString();
-    }
-
-    private int getRandomDigits() {
-        Random random = new Random();
-        return random.nextInt(899) + 100;
+        return FieldIncrementData.getInstance().getNewPuidDigits(puidname);
     }
 
     public long getPuid() {
@@ -80,6 +74,14 @@ public class PUID {
 
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
+    }
+
+    public Boolean getObsolete() {
+        return obsolete;
+    }
+
+    public void setObsolete(Boolean obsolete) {
+        this.obsolete = obsolete;
     }
 
     @Override
