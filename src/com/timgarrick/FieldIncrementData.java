@@ -36,8 +36,7 @@ public class FieldIncrementData {
     }
 
     public int getNewPuidDigits(String s) {
-        ArrayList<PUID> reversedList = new ArrayList<PUID>(PuidList.getInstance().getPuidList());
-
+        ArrayList<PUID> reversedList = new ArrayList<>(PuidList.getInstance().getPuidList());
         Collections.reverse(reversedList);
 
         for (PUID puid : reversedList) {
