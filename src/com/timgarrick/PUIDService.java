@@ -25,9 +25,10 @@ public class PUIDService {
     }
 
     //create a new PUID
-    public boolean createPUID(String surname, String firstname) {
-        PuidList.getInstance().puidListAddUser(new PUID(surname, firstname));
-        return true;
+    public PUID createPUID(String surname, String firstname) {
+
+        return PuidList.getInstance().puidListAddUser(new PUID(surname, firstname));
+
     }
 
     //delete a PUID by object
@@ -68,14 +69,16 @@ public class PUIDService {
         puid.setSurname(surname);
         puid.setFirstname(firstname);
         puid.setObsolete(obsolete);
-        puid.setPuidname(puid.generatePuidName(surname, firstname));
+        puid.setPuidname(puid.generatePuidName(puid.getPartialPuidname()));
         puid.setModifiedDate(new Date());
-        System.out.println("Puid " + puid + " has been updated. Surname: " + puid.getSurname() +
-                ", Firstname: " + puid.getFirstname());
         return puid;
     }
 
-    public PUID findPUID(Long id) {
+    public PUID amendPUID(String puidname, String surname, String firstname, Boolean obsolete) {
+        return amendPUID(findPUID(puidname), surname, firstname, obsolete);
+    }
+
+    public PUID findPUID(long id) {
         for (PUID puid : PuidList.getInstance().getPuidList()) {
             if(puid.getPuid() == id) {
                 return puid;
@@ -99,4 +102,34 @@ public class PUIDService {
         return PuidList.getInstance().getPuidList();
     }
 
+    public void displayPUID(String puidname) {
+        displayPUID(findPUID(puidname));
+    }
+
+    public void displayPUID(long id) {
+        displayPUID(findPUID(id));
+    }
+
+    public void displayPUID(PUID puid) {
+        System.out.println("PUID: " + puid.getPuid());
+        System.out.println("PUIDname: " + puid.getPuidname());
+        System.out.println("Name: " + puid.getFirstname() + " " + puid.getSurname());
+        System.out.println("Obsolete: " + puid.getObsolete().toString() + "\n");
+    }
+
+
+    public void displayAllPUIDS() {
+        for (PUID puid: PuidList.getInstance().getPuidList()
+             ) {
+            displayPUID(puid);
+        }
+    }
+
+    public void displayAllPUIDS(int limit) {
+
+        for (int i = 0; i < limit; i++) {
+            displayPUID(PuidList.getInstance().getPuidList().get(i));
+
+        }
+    }
 }

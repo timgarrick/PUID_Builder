@@ -19,8 +19,9 @@ public class PuidList {
         return instance;
     }
 
-    public void puidListAddUser(PUID puid){
+    public PUID puidListAddUser(PUID puid){
         puidList.add(puid);
+        return puid;
     }
 
     public ArrayList<PUID> getPuidList() {

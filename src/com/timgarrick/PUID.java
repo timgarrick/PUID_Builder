@@ -4,6 +4,7 @@ import java.util.Date;
 public class PUID {
     private long puid;
     private String puidname;
+    private String partialPuidname;
     private String surname;
     private String firstname;
     private Date createdDate;
@@ -11,22 +12,25 @@ public class PUID {
     private Boolean obsolete;
 
     public PUID(String surname, String firstname) {
+        String name = surname.toLowerCase() + firstname.toLowerCase().charAt(0);
+
         this.puid = FieldIncrementData.getInstance().getNewPuid();
-        this.puidname = generatePuidName(surname, firstname);
+        this.puidname = generatePuidName(name);
+        this.partialPuidname = name;
         this.surname = surname;
         this.firstname = firstname;
         this.createdDate = new Date();
         this.obsolete = false;
     }
 
-    public String generatePuidName(String surname, String firstname) {
-        StringBuilder puidname = new StringBuilder();
-
-        puidname.append(surname.toLowerCase());
-        puidname.append(firstname.toLowerCase().charAt(0));
-
-        return FieldIncrementData.getInstance().getNewPuidDigits(puidname);
+    public String generatePuidName(String s) {
+        return s + FieldIncrementData.getInstance().getNewPuidDigits(s);
     }
+
+    public String getPartialPuidname() {
+        return partialPuidname;
+    }
+
 
     public long getPuid() {
         return puid;
