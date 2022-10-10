@@ -1,8 +1,6 @@
-package com.timgarrick;
+package com.timgarrick.main;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PuidList {
     private ArrayList<PUID> puidList = new ArrayList<>();

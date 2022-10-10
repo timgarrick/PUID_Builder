@@ -1,11 +1,10 @@
-package com.timgarrick;
+package com.timgarrick.main;
 
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
         ArrayList<PUID> createdUsers = new ArrayList<>();
         PUIDService puidService = PUIDService.getInstance();
         PuidList puidList = PuidList.getInstance();
