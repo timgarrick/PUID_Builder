@@ -1,4 +1,4 @@
-package com.timgarrick;
+package com.timgarrick.main;
 import java.util.Date;
 
 public class PUID {

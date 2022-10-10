@@ -1,9 +1,7 @@
-package com.timgarrick;
+package com.timgarrick.main;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 public class FieldIncrementData {
     private static FieldIncrementData instance = null;

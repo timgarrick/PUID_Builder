@@ -1,13 +1,12 @@
-package com.timgarrick;
+package com.timgarrick.main;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class PUIDService {
     private static PUIDService instance = null;
 
-    private PUIDService(){
+    PUIDService(){
 
     }
 
